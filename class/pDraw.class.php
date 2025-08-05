@@ -155,7 +155,7 @@ class pDraw
 
 			$FillColor = $this->allocateColor($R, $G, $B, $Alpha);
 			if (count($Points) >= 6) {
-				ImageFilledPolygon($this->Picture, $Points, count($Points) / 2, $FillColor);
+				ImageFilledPolygon($this->Picture, $Points, $FillColor);
 			}
 		}
 
@@ -1359,7 +1359,7 @@ class pDraw
 			($Alpha < 0) 	AND $Alpha = 0;
 			($Alpha > 100) 	AND $Alpha = 100;
 
-			$this->aColorCache["$R.$G.$B.$Alpha"] = imagecolorallocatealpha($this->Picture, $R, $G, $B, (1.27 * (100 - $Alpha)));
+			$this->aColorCache["$R.$G.$B.$Alpha"] = imagecolorallocatealpha($this->Picture, $R, $G, $B, (int) (1.27 * (100 - $Alpha)));
 		}
 
 		return $this->aColorCache["$R.$G.$B.$Alpha"];
@@ -1475,7 +1475,7 @@ class pDraw
 		($Angle == 180 || $Angle == 360) AND $Points[4] = $Points[2];
 		($Angle == 90 || $Angle == 270) AND $Points[5] = $Points[3];
 
-		ImageFilledPolygon($this->Picture, $Points, 4, $this->allocateColor($FillR, $FillG, $FillB, $Alpha));
+		ImageFilledPolygon($this->Picture, $Points, $this->allocateColor($FillR, $FillG, $FillB, $Alpha));
 		$this->drawLine($Points[0], $Points[1], $Points[2], $Points[3], $RGB);
 		$this->drawLine($Points[2], $Points[3], $Points[4], $Points[5], $RGB);
 		$this->drawLine($Points[0], $Points[1], $Points[4], $Points[5], $RGB);
@@ -1489,7 +1489,7 @@ class pDraw
 			($Angle == 180 || $Angle == 360) AND $Points[4] = $Points[2];
 			($Angle == 90 || $Angle == 270) AND $Points[5] = $Points[3];
 
-			ImageFilledPolygon($this->Picture, $Points, 4, $this->allocateColor($FillR, $FillG, $FillB, $Alpha));
+			ImageFilledPolygon($this->Picture, $Points, $this->allocateColor($FillR, $FillG, $FillB, $Alpha));
 			$this->drawLine($Points[0], $Points[1], $Points[2], $Points[3], $RGB);
 			$this->drawLine($Points[2], $Points[3], $Points[4], $Points[5], $RGB);
 			$this->drawLine($Points[0], $Points[1], $Points[4], $Points[5], $RGB);
@@ -1523,7 +1523,7 @@ class pDraw
 
 		extract($Format);
 
-		$Angle = $Angle % 360;
+		$Angle = (int) $Angle % 360;
 		$X2 = sin(($Angle + 180) * PI / 180) * $Length + $X1;
 		$Y2 = cos(($Angle + 180) * PI / 180) * $Length + $Y1;
 		($RoundPos && $Angle > 0 && $Angle < 180) AND $Y2 = ceil($Y2);
@@ -2931,7 +2931,7 @@ class pDraw
 	function modulo($Value1, $Value2)
 	{
 
-		return (floor($Value2) == 0) ? 0 : ($Value1 % $Value2);
+		return (floor($Value2) == 0) ? 0 : ( (int) $Value1 % (int) $Value2 );
 
 		#if (floor($Value2) == 0) {
 		#	return 0;
