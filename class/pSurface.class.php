@@ -78,10 +78,10 @@ class pSurface
 		$Position = LABEL_POSITION_TOP;
 		$Labels = NULL;
 		$CountOffset = 0;
-		
+
 		/* Override defaults */
 		extract($Format);
-		
+
 		if ($Labels != NULL && !is_array($Labels)) {
 			$Labels = [$Labels];
 		}
@@ -92,11 +92,11 @@ class pSurface
 		if ($Position == LABEL_POSITION_TOP) {
 			$YPos = $this->pChartObject->GraphAreaY1 - $Padding;
 			$Settings["Align"] = ($Angle == 0) ? TEXT_ALIGN_BOTTOMMIDDLE : TEXT_ALIGN_MIDDLELEFT;
-			
+
 		} elseif ($Position == LABEL_POSITION_BOTTOM) {
 			$YPos = $this->pChartObject->GraphAreaY2 + $Padding;
 			$Settings["Align"] = ($Angle == 0) ? TEXT_ALIGN_TOPMIDDLE : TEXT_ALIGN_MIDDLERIGHT;
-			
+
 		} else {
 			return -1;
 		}
@@ -120,10 +120,10 @@ class pSurface
 		$Position = LABEL_POSITION_LEFT;
 		$Labels = NULL;
 		$CountOffset = 0;
-		
+
 		/* Override defaults */
 		extract($Format);
-		
+
 		if ($Labels != NULL && !is_array($Labels)) {
 			$Labels = [$Labels];
 		}
@@ -131,7 +131,7 @@ class pSurface
 		$Y0 = $this->pChartObject->GraphAreaY1;
 		$YSize = ($this->pChartObject->GraphAreaY2 - $this->pChartObject->GraphAreaY1) / ($this->GridSizeY + 1);
 		$Settings = ["Angle" => $Angle,"R" => $R,"G" => $G,"B" => $B,"Alpha" => $Alpha];
-		
+
 		if ($Position == LABEL_POSITION_LEFT) {
 			$XPos = $this->pChartObject->GraphAreaX1 - $Padding;
 			$Settings["Align"] = TEXT_ALIGN_MIDDLERIGHT;
@@ -158,10 +158,10 @@ class pSurface
 		$Alpha = 100;
 		$Ticks = 3;
 		$Padding = 0;
-		
+
 		/* Override defaults */
 		extract($Format);
-		
+
 		$X0 = $this->pChartObject->GraphAreaX1;
 		$Y0 = $this->pChartObject->GraphAreaY1;
 		$XSize = ($this->pChartObject->GraphAreaX2 - $this->pChartObject->GraphAreaX1) / ($this->GridSizeX + 1);
@@ -210,10 +210,10 @@ class pSurface
 		$BorderB = 0;
 		$Surrounding = -1;
 		$Padding = 1;
-		
+
 		/* Override defaults */
 		extract($Format);
-		
+
 		$X0 = $this->pChartObject->GraphAreaX1;
 		$Y0 = $this->pChartObject->GraphAreaY1;
 		$XSize = ($this->pChartObject->GraphAreaX2 - $this->pChartObject->GraphAreaX1) / ($this->GridSizeX + 1);
@@ -222,18 +222,18 @@ class pSurface
 			for ($Y = 0; $Y <= $this->GridSizeY; $Y++) {
 				$Value = $this->Points[$X][$Y];
 				if ($Value != UNKNOWN && $Value != IGNORED) {
-					
+
 					$X1 = floor($X0 + $X * $XSize) + $Padding;
 					$Y1 = floor($Y0 + $Y * $YSize) + $Padding;
 					$X2 = floor($X0 + $X * $XSize + $XSize);
 					$Y2 = floor($Y0 + $Y * $YSize + $YSize);
-					
+
 					if ($Palette != NULL) {
 						$R = (isset($Palette[$Value]) && isset($Palette[$Value]["R"])) ? $Palette[$Value]["R"] : 0;
 						$G = (isset($Palette[$Value]) && isset($Palette[$Value]["G"])) ? $Palette[$Value]["G"] : 0;
 						$B = (isset($Palette[$Value]) && isset($Palette[$Value]["B"])) ? $Palette[$Value]["B"] : 0;
 						$Alpha = (isset($Palette[$Value]) && isset($Palette[$Value]["Alpha"])) ? $Palette[$Value]["Alpha"] : 1000;
-						
+
 					} else {
 						$R = (($ShadeR2 - $ShadeR1) / 100) * $Value + $ShadeR1;
 						$G = (($ShadeG2 - $ShadeG1) / 100) * $Value + $ShadeG1;
@@ -242,7 +242,7 @@ class pSurface
 					}
 
 					$Settings = ["R" => $R,"G" => $G,"B" => $B,"Alpha" => $Alpha];
-					
+
 					if ($Border) {
 						$Settings["BorderR"] = $BorderR;
 						$Settings["BorderG"] = $BorderG;

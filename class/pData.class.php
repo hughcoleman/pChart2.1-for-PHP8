@@ -84,7 +84,7 @@ class pData
 		if (!isset($this->Data["Series"][$SerieName])){
 			$this->initialise($SerieName);
 		}
-		
+
 		if (is_array($Values)) {
 			foreach($Values as $Key => $Value) {
 				$this->Data["Series"][$SerieName]["Data"][] = $Value;
@@ -92,7 +92,7 @@ class pData
 		} else {
 			$this->Data["Series"][$SerieName]["Data"][] = $Values;
 		}
-		
+
 		if ($Values != VOID) {
 			$StrippedData = $this->stripVOID($this->Data["Series"][$SerieName]["Data"]);
 			if (empty($StrippedData)) {
@@ -560,7 +560,7 @@ class pData
 	function setSerieOnAxis($Series, $AxisID)
 	{
 		$Series = $this->convertToArray($Series);
-		
+
 		foreach($Series as $Key => $Serie) {
 			$PreviousAxis = $this->Data["Series"][$Serie]["Axis"];
 			/* Create missing axis */
@@ -600,7 +600,7 @@ class pData
 	function setSerieWeight($Series, $Weight = 0)
 	{
 		$Series = $this->convertToArray($Series);
-	
+
 		foreach($Series as $Key => $Serie) {
 			if (isset($this->Data["Series"][$Serie])) {
 				$this->Data["Series"][$Serie]["Weight"] = $Weight;
@@ -621,7 +621,7 @@ class pData
 				"Alpha" => $this->Data["Series"][$Serie]["Color"]["Alpha"]
 			];
 		}
-		
+
 	}
 
 	/* Set the color of one serie */
@@ -632,7 +632,7 @@ class pData
 		$G = isset($Format["G"]) ? $Format["G"] : 0;
 		$B = isset($Format["B"]) ? $Format["B"] : 0;
 		$Alpha = isset($Format["Alpha"]) ? $Format["Alpha"] : 100;
-			
+
 		foreach($Series as $Key => $Serie) {
 			if (isset($this->Data["Series"][$Serie])) {
 				$OldR = $this->Data["Series"][$Serie]["Color"]["R"];
@@ -715,7 +715,7 @@ class pData
 	function initialise($Serie)
 	{
 		$ID = (isset($this->Data["Series"])) ? count($this->Data["Series"]) : 0;
-		
+
 		$this->Data["Series"][$Serie] = [
 			"Description" => $Serie,
 			"isDrawable" => TRUE,
@@ -736,9 +736,9 @@ class pData
 		$SelectedSeries = [];
 		$MaxVal = 0;
 		foreach($this->Data["Axis"] as $AxisID => $Axis) {
-			
+
 			($UnitChange != NULL) AND $this->Data["Axis"][$AxisID]["Unit"] = $UnitChange;
-		
+
 			foreach($this->Data["Series"] as $SerieName => $Serie) {
 				if ($Serie["Axis"] == $AxisID && $Serie["isDrawable"] == TRUE && $SerieName != $Abscissa) {
 					$SelectedSeries[$SerieName] = $SerieName;
@@ -810,7 +810,7 @@ class pData
 						foreach($Values as $Key => $Value) {
 							(!in_array($Key, $SkipColumns)) AND $this->addPoints($Value, $SerieNames[$Key]);
 						}
-					} 
+					}
 				} # $Buffer != ""
 			} # while
 
@@ -821,23 +821,23 @@ class pData
 	/* Create a dataset based on a formula */
 	function createFunctionSerie($SerieName, $Formula = "", array $Options = [])
 	{
-		
+
 		if ($Formula == "") {
 			return 0;
 		}
-		
+
 		$MinX = isset($Options["MinX"]) ? $Options["MinX"] : -10;
 		$MaxX = isset($Options["MaxX"]) ? $Options["MaxX"] : 10;
 		$XStep = isset($Options["XStep"]) ? $Options["XStep"] : 1;
 		$AutoDescription = isset($Options["AutoDescription"]) ? $Options["AutoDescription"] : FALSE;
 		$RecordAbscissa = isset($Options["RecordAbscissa"]) ? $Options["RecordAbscissa"] : FALSE;
 		$AbscissaSerie = isset($Options["AbscissaSerie"]) ? $Options["AbscissaSerie"] : "Abscissa";
-		
+
 		$Result = [];
 		$Abscissa = [];
 
 		for ($i = $MinX; $i <= $MaxX; $i = $i + $XStep) {
-							
+
 			$Expression = "\$return = '!'.(" . str_replace("z", $i, $Formula) . ");";
 
 			if (substr($Expression, -4, 4) == "/0);"){ # Division by zero in ..\pData.class.php(849) : eval()'d code on line 1
@@ -848,12 +848,12 @@ class pData
 				}
 
 				$return = ($return == "!") ? VOID : $this->right($return, strlen($return) - 1);
-				
+
 				if (in_array($return, ["NAN", "INF", "-INF"])){
 					$return = VOID;
 				}
 			}
-				
+
 			$Abscissa[] = $i;
 			$Result[] = $return;
 		}

@@ -19,7 +19,7 @@ define("TEXT_POS_RIGHT", 690002);
 class pSplit
 {
 	var $pChartObject;
-	
+
 	/* Class creator */
 	function __construct(){}
 
@@ -76,11 +76,11 @@ class pSplit
 		$LeftY = ((($Y2 - $Y1) / 2) + $Y1) - ($LeftHeight / 2);
 		$RightY = $Y1;
 		$VectorX = (($X2 - $X1) / 2);
-		
+
 		foreach($Data["Series"][$DataSerie]["Data"] as $Key => $Value) {
-			
+
 			$Label = (isset($Data["Series"][$LabelSerie]["Data"][$Key])) ? $Data["Series"][$LabelSerie]["Data"][$Key] : "-";
-			
+
 			$LeftY1 = $LeftY;
 			$LeftY2 = $LeftY + $Value * $YScale;
 			$RightY1 = $RightY + $Spacing;

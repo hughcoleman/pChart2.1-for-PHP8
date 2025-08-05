@@ -64,13 +64,13 @@ class pIndicator
 		$CaptionFontName = $this->pChartObject->FontName;
 		$CaptionFontSize = $this->pChartObject->FontSize;
 		$Unit = "";
-		
+
 		/* Override defaults */
 		extract($Format);
-		
+
 		/* Convert the Values to display to an array if needed */
 		(!is_array($Values)) AND $Values = [$Values];
-		
+
 		/* Determine indicator visual configuration */
 		$OverallMin = $IndicatorSections[0]["End"];
 		$OverallMax = $IndicatorSections[0]["Start"];
@@ -113,7 +113,7 @@ class pIndicator
 					$Poly = [$X1, $Y];
 					$LastPointWritten = FALSE;
 					foreach($Break as $iKey => $Value) {
-						
+
 						if ($Value - 5 >= $X1) {
 							$Poly[] = $Value - 5;
 							$Poly[] = $Y;
@@ -124,7 +124,7 @@ class pIndicator
 
 						$Poly[] = $Value;
 						$Poly[] = $Y + 5;
-						
+
 						if ($Value + 5 <= $X2) {
 							$Poly[] = $Value + 5;
 							$Poly[] = $Y;

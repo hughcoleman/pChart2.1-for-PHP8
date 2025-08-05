@@ -32,7 +32,7 @@ class pBubble
 	{
 		(!is_array($DataSeries)) AND $DataSeries = [$DataSeries];
 		(!is_array($WeightSeries)) AND $WeightSeries = [$WeightSeries];
-		
+
 		/* Parse each data series to find the new min & max boundaries to scale */
 		$NewPositiveSerie = [];
 		$NewNegativeSerie = [];
@@ -125,13 +125,13 @@ class pBubble
 		$BorderB = 0;
 		$BorderAlpha = 30;
 		$RecordImageMap = FALSE;
-		
+
 		/* Override defaults */
 		extract($Format);
-		
+
 		(!is_array($DataSeries)) AND $DataSeries = [$DataSeries];
 		(!is_array($WeightSeries)) AND $WeightSeries = [$WeightSeries];
-		
+
 		$Data = $this->pDataObject->getData();
 		$Palette = $this->pDataObject->getPalette();
 		if (isset($Data["Series"]["BubbleFakePositiveSerie"])) {
@@ -226,7 +226,7 @@ class pBubble
 					}
 
 					$X = $X + $XStep;
-					
+
 				} elseif ($Data["Orientation"] == SCALE_POS_TOPBOTTOM) {
 					if ($XDivs == 0) {
 						$XStep = 0;
@@ -268,17 +268,17 @@ class pBubble
 
 	function writeBubbleLabel($SerieName, $SerieWeightName, $Points, array $Format = [])
 	{
-		
+
 		$Data = $this->pDataObject->getData();
 		$Palette = $this->pDataObject->getPalette();
 		if (!isset($Data["Series"][$SerieName]) || !isset($Data["Series"][$SerieWeightName])) {
 			return 0;
 		}
-		
+
 		$OverrideTitle = isset($Format["OverrideTitle"]) ? $Format["OverrideTitle"] : NULL;
 		$DrawPoint = isset($Format["DrawPoint"]) ? $Format["DrawPoint"] : LABEL_POINT_BOX;
 		(!is_array($Points)) AND $Points = [$Points];
-		
+
 		list($XMargin, $XDivs) = $this->pChartObject->scaleGetXSettings();
 		$AxisID = $Data["Series"][$SerieName]["Axis"];
 		$AxisMode = $Data["Axis"][$AxisID]["Display"];
@@ -307,7 +307,7 @@ class pBubble
 			$Caption = $Abscissa . $Value . " / " . $Weight;
 			$Description = (isset($Data["Series"][$SerieName]["Description"])) ? $Data["Series"][$SerieName]["Description"] : "No description";
 			$Series = ["Format" => $Color,"Caption" => $Caption];
-			
+
 			if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
 				$XStep = ($XDivs == 0) ? 0 : ($this->pChartObject->GraphAreaX2 - $this->pChartObject->GraphAreaX1 - $XMargin * 2) / $XDivs;
 				$X = floor($X + $Point * $XStep);

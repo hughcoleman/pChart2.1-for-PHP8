@@ -25,7 +25,7 @@ class pRadar
 	var $pChartObject;
 	/* Class creator */
 	function __construct(){}
-	
+
 	/* Draw a radar chart */
 	function drawRadar($Object, $Values, array $Format = [])
 	{
@@ -91,10 +91,10 @@ class pRadar
 
 		/* Override defaults */
 		extract($Format);
-		
+
 		/* Cancel default tick length if ticks not enabled */
 		($DrawTicks == FALSE) AND $TicksLength = 0;
-		
+
 		/* Data Processing */
 		$Data = $Values->getData();
 		$Palette = $Values->getPalette();
@@ -154,7 +154,7 @@ class pRadar
 			$Object->Shadow = FALSE;
 			if ($BackgroundGradient == NULL) {
 				if ($Layout == RADAR_LAYOUT_STAR) {
-					
+
 					$Color = ["R" => $BackgroundR,	"G" => $BackgroundG, "B" => $BackgroundB, "Alpha" => $BackgroundAlpha];
 					$PointArray = [];
 					for ($i = 0; $i <= 360; $i = $i + (360 / $Points)) {
@@ -162,7 +162,7 @@ class pRadar
 						$PointArray[] = sin(deg2rad($i + $AxisRotation)) * $EdgeHeight + $CenterY;
 					}
 					$Object->drawPolygon($PointArray, $Color);
-					
+
 				} elseif ($Layout == RADAR_LAYOUT_CIRCLE) {
 					$Color =["R" => $BackgroundR,"G" => $BackgroundG,"B" => $BackgroundB,"Alpha" => $BackgroundAlpha];
 					$Object->drawFilledCircle($CenterX, $CenterY, $EdgeHeight, $Color);
@@ -207,7 +207,7 @@ class pRadar
 		/* Axis to axis lines */
 		$Color = ["R" => $AxisR,"G" => $AxisG,"B" => $AxisB,"Alpha" => $AxisAlpha];
 		$ColorDotted = ["R" => $AxisR,"G" => $AxisG,"B" => $AxisB,"Alpha" => $AxisAlpha * .8,"Ticks" => 2];
-		
+
 		if ($Layout == RADAR_LAYOUT_STAR) {
 			for ($j = 1; $j <= $Segments; $j++) {
 				for ($i = 0; $i < 360; $i = $i + (360 / $Points)) {
@@ -239,7 +239,7 @@ class pRadar
 			$Options["FontName"] = $AxisFontName;
 			$Options["FontSize"] = $AxisFontSize;
 			$Angle = 360 / ($Points * 2);
-			
+
 			for ($j = 1; $j <= $Segments; $j++) {
 				$Label = $j * $SegmentHeight;
 				if ($Layout == RADAR_LAYOUT_CIRCLE) {
@@ -309,7 +309,7 @@ class pRadar
 								break;
 						}
 					}
-					
+
 					$Object->drawText($LabelX, $LabelY, $Label, $Align);
 				}
 			}
@@ -322,9 +322,9 @@ class pRadar
 		$Plot = [];
 		foreach($Data["Series"] as $SerieName => $DataS) {
 			if ($SerieName != $LabelSerie) {
-				
+
 				$Color = ["R" => $Palette[$ID]["R"],"G" => $Palette[$ID]["G"],"B" => $Palette[$ID]["B"],"Alpha" => $Palette[$ID]["Alpha"],"Surrounding" => $PointSurrounding];
-				
+
 				foreach($DataS["Data"] as $Key => $Value) {
 					$Angle = (360 / $Points) * $Key;
 					$Length = ($EdgeHeight / ($Segments * $SegmentHeight)) * $Value;
@@ -362,7 +362,7 @@ class pRadar
 			/* Bubble and labels settings */
 			$TextSettings = array("Align" => TEXT_ALIGN_MIDDLEMIDDLE,"FontName" => $ValueFontName,"FontSize" => $ValueFontSize,"R" => $Palette[$ID]["R"],"G" => $Palette[$ID]["G"],"B" => $Palette[$ID]["B"]);
 			$InnerColor = ["R" => $InnerBubbleR,"G" => $InnerBubbleG,"B" => $InnerBubbleB,"Alpha" => $InnerBubbleAlpha];
-			
+
 			if ($OuterBubbleR != VOID) {
 				$OuterColor = ["R" => $OuterBubbleR,"G" => $OuterBubbleG,"B" => $OuterBubbleB,"Alpha" => $OuterBubbleAlpha];
 			} else {
@@ -455,15 +455,15 @@ class pRadar
 		$X2 = $Object->GraphAreaX2;
 		$Y2 = $Object->GraphAreaY2;
 		$RecordImageMap = FALSE;
-		
+
 		/* Override defaults */
 		extract($Format);
-		
+
 		($AxisBoxRounded) AND $DrawAxisValues = TRUE;
-		
+
 		/* Cancel default tick length if ticks not enabled */
 		($DrawTicks == FALSE) AND $TicksLength = 0;
-		
+
 		/* Data Processing */
 		$Data = $Values->getData();
 		$Palette = $Values->getPalette();
@@ -548,7 +548,7 @@ class pRadar
 			}
 
 			($AxisBoxRounded) AND $Options["BoxRounded"] = TRUE;
-			
+
 			$Options["FontName"] = $AxisFontName;
 			$Options["FontSize"] = $AxisFontSize;
 			$Angle = 360 / ($Points * 2);
@@ -570,7 +570,7 @@ class pRadar
 				$LabelX = cos(deg2rad($i + $AxisRotation)) * ($EdgeHeight + $LabelPadding + $TicksLength) + $CenterX;
 				$LabelY = sin(deg2rad($i + $AxisRotation)) * ($EdgeHeight + $LabelPadding + $TicksLength) + $CenterY;
 				$Label = $i . "°";
-				
+
 				if ($LabelPos == RADAR_LABELS_ROTATED) {
 					$Align = ["Angle" => (360 - $i),"Align" => TEXT_ALIGN_BOTTOMMIDDLE];
 				} else {
@@ -601,7 +601,7 @@ class pRadar
 							break;
 					}
 				}
-				
+
 				$Object->drawText($LabelX, $LabelY, $Label, $Align);
 			}
 
@@ -613,9 +613,9 @@ class pRadar
 		$Plot = [];
 		foreach($Data["Series"] as $SerieName => $DataSet) {
 			if ($SerieName != $LabelSerie) {
-				
+
 				$Color = array("R" => $Palette[$ID]["R"],"G" => $Palette[$ID]["G"],"B" => $Palette[$ID]["B"],"Alpha" => $Palette[$ID]["Alpha"],"Surrounding" => $PointSurrounding);
-				
+
 				foreach($DataSet["Data"] as $Key => $Value) {
 					$Angle = $Data["Series"][$LabelSerie]["Data"][$Key];
 					$Length = ($EdgeHeight / ($Segments * $SegmentHeight)) * $Value;

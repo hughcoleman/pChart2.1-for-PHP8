@@ -20,7 +20,7 @@ class pStock
 {
 	var $pChartObject;
 	var $pDataObject;
-	
+
 	/* Class creator */
 	function __construct($pChartObject, $pDataObject)
 	{
@@ -73,14 +73,14 @@ class pStock
 		$MedianAlpha = 100;
 		$RecordImageMap = FALSE;
 		$ImageMapTitle = "Stock Chart";
-		
+
 		/* Override defaults */
 		extract($Format);
-		
+
 		/* Data Processing */
 		$Data = $this->pDataObject->getData();
 		$Palette = $this->pDataObject->getPalette();
-		
+
 		if ($BoxUpSurrounding != NULL) {
 			$BoxUpBorderR = $BoxUpR + $BoxUpSurrounding;
 			$BoxUpBorderG = $BoxUpG + $BoxUpSurrounding;
@@ -131,12 +131,12 @@ class pStock
 		$BoxUpSettings = ["R" => $BoxUpR,"G" => $BoxUpG,"B" => $BoxUpB,"Alpha" => $BoxUpAlpha,"BorderR" => $BoxUpBorderR,"BorderG" => $BoxUpBorderG,"BorderB" => $BoxUpBorderB,"BorderAlpha" => $BoxUpBorderAlpha];
 		$BoxDownSettings = ["R" => $BoxDownR,"G" => $BoxDownG,"B" => $BoxDownB,"Alpha" => $BoxDownAlpha,"BorderR" => $BoxDownBorderR,"BorderG" => $BoxDownBorderG,"BorderB" => $BoxDownBorderB,"BorderAlpha" => $BoxDownBorderAlpha];
 		$MedianSettings = ["R" => $MedianR,"G" => $MedianG,"B" => $MedianB,"Alpha" => $MedianAlpha];
-		
+
 		foreach($Plots as $Key => $Points) {
-			
+
 			$PosArray = $this->pChartObject->scaleComputeY($Points, ["AxisID" => $AxisID]);
 			$Values = "Open :" . $Data["Series"][$SerieOpen]["Data"][$Key] . "<br />Close : " . $Data["Series"][$SerieClose]["Data"][$Key] . "<br />Min : " . $Data["Series"][$SerieMin]["Data"][$Key] . "<br />Max : " . $Data["Series"][$SerieMax]["Data"][$Key] . "<br />";
-			
+
 			if ($SerieMedian != NULL) {
 				$Values = $Values . "Median : " . $Data["Series"][$SerieMedian]["Data"][$Key] . "<br />";
 			}
@@ -202,9 +202,9 @@ class pStock
 				}
 
 				$X = $X + $XStep;
-				
+
 			} elseif ($Data["Orientation"] == SCALE_POS_TOPBOTTOM) {
-				
+
 				if ($YZero > $this->pChartObject->GraphAreaX2 - 1) {
 					$YZero = $this->pChartObject->GraphAreaX2 - 1;
 				}

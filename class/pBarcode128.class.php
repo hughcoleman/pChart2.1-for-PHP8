@@ -20,7 +20,7 @@ class pBarcode128
 	var $Reverse = [];
 	var $Result;
 	var $pChartObject;
-	
+
 	/* Class creator */
 	function __construct($BasePath = "")
 	{
@@ -52,10 +52,10 @@ class pBarcode128
 		$DrawArea = FALSE;
 		$FontSize = 12;
 		$Height = 30;
-		
+
 		/* Override defaults */
 		extract($Format);
-		
+
 		$TextString = $this->encode128($TextString);
 		$BarcodeLength = strlen($this->Result);
 		$WOffset = ($DrawArea) ? 20 : 0;
@@ -64,7 +64,7 @@ class pBarcode128
 		$Y1 = sin($Angle * PI / 180) * ($WOffset + $BarcodeLength);
 		$X2 = $X1 + cos(($Angle + 90) * PI / 180) * ($HOffset + $Height);
 		$Y2 = $Y1 + sin(($Angle + 90) * PI / 180) * ($HOffset + $Height);
-		
+
 		return ["Width" => max(abs($X1), abs($X2)),"Height" => max(abs($Y1), abs($Y2))];
 	}
 
@@ -107,10 +107,10 @@ class pBarcode128
 		$AreaBorderR = $AreaR;
 		$AreaBorderG = $AreaG;
 		$AreaBorderB = $AreaB;
-		
+
 		/* Override defaults */
 		extract($Format);
-		
+
 		$TextString = $this->encode128($Value);
 		if ($DrawArea) {
 			$X1 = $X + cos(($Angle - 135) * PI / 180) * 10;

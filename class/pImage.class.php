@@ -72,7 +72,7 @@ class pImage extends pDraw
 	var $DataSet = NULL; // Attached dataset
 	/* Last generated chart info */
 	var $LastChartLayout = CHART_LAST_LAYOUT_REGULAR; // Last layout : regular or stacked
-	
+
 	/* Class constructor */
 	function __construct($XSize, $YSize, $DataSet = NULL, $TransparentBackground = FALSE)
 	{
@@ -93,7 +93,7 @@ class pImage extends pDraw
 			imagefilledrectangle($this->Picture, 0, 0, $XSize, $YSize, $this->AllocateColor(255, 255, 255));
 		}
 	}
-	
+
 	function __destruct(){
 		imagedestroy($this->Picture);
 	}
@@ -107,10 +107,10 @@ class pImage extends pDraw
 		$G = 0;
 		$B = 0;
 		$Alpha = 10;
-		
+
 		/* Override defaults */
 		extract($Format);
-				
+
 		$this->Shadow = $Enabled;
 		$this->ShadowX = $X;
 		$this->ShadowY = $Y;
@@ -118,7 +118,7 @@ class pImage extends pDraw
 		$this->ShadowG = $G;
 		$this->ShadowB = $B;
 		$this->Shadowa = $Alpha;
-		
+
 		if ($this->ShadowX == 0 || $this->ShadowY == 0){
 			die("Invalid shadow specs");
 		}
@@ -204,7 +204,7 @@ class pImage extends pDraw
 		$Opposite = $Y2 - $Y1;
 		$Adjacent = $X2 - $X1;
 		$Angle = rad2deg(atan2($Opposite, $Adjacent));
-		
+
 		return (($Angle > 0) ? $Angle : (360 - abs($Angle)));
 	}
 
@@ -272,17 +272,17 @@ class pImage extends pDraw
 		$Alpha = 100;
 		$FontName = NULL;
 		$FontSize = NULL;
-		
+
 		/* Override defaults */
 		extract($Format);
-		
+
 		($R != - 1) AND $this->FontColorR = $R;
 		($G != - 1) AND $this->FontColorG = $G;
 		($B != - 1) AND $this->FontColorB = $B;
 		($Alpha != NULL) AND $this->FontColorA = $Alpha;
 		($FontName != NULL) AND $this->FontName = $FontName;
 		($FontSize != NULL) AND $this->FontSize = $FontSize;
-		
+
 	}
 
 	/* Returns the 1st decimal values (used to correct AA bugs) */
@@ -334,7 +334,7 @@ class pImage extends pDraw
 		/* Encode the characters in the imagemap in HTML standards */
 		$Title = str_replace("&#8364;", "\u20AC", $Title); # Momchil TODO TEST THIS
 		$Title = htmlentities($Title, ENT_QUOTES); #, "ISO-8859-15"); # As of PHP 5.6 The default value for the encoding parameter = the default_charset config option.
-		
+
 		if ($HTMLEncode) {
 			$Message = htmlentities($Message, ENT_QUOTES); #, "ISO-8859-15");
 			#$Message = str_replace("&lt;", "<", $Message); # Seems covered Example #1 A htmlentities() example
@@ -346,7 +346,7 @@ class pImage extends pDraw
 				$this->initialiseImageMap();
 			}
 			$_SESSION[$this->ImageMapIndex][] = [$Type,$Plots,$Color,$Title,$Message];
-			
+
 		} elseif ($this->ImageMapStorageMode == IMAGE_MAP_STORAGE_FILE) {
 			$Handle = fopen($this->ImageMapStorageFolder . "/" . $this->ImageMapFileName . ".map", 'a');
 			fwrite($Handle, $Type . IMAGE_MAP_DELIMITER . $Plots . IMAGE_MAP_DELIMITER . $Color . IMAGE_MAP_DELIMITER . $Title . IMAGE_MAP_DELIMITER . $Message . "\r\n");
@@ -402,7 +402,7 @@ class pImage extends pDraw
 					}
 				}
 			}
-			
+
 		} elseif ($this->ImageMapStorageMode == IMAGE_MAP_STORAGE_FILE) {
 			$TempArray = [];
 			$Handle = fopen($this->ImageMapStorageFolder . "/" . $this->ImageMapFileName . ".map", "r");
@@ -461,7 +461,7 @@ class pImage extends pDraw
 					$ID++;
 				}
 			}
-			
+
 		} elseif ($this->ImageMapStorageMode == IMAGE_MAP_STORAGE_FILE) {
 			$TempArray = [];
 			$Handle = fopen($this->ImageMapStorageFolder . "/" . $this->ImageMapFileName . ".map", "r");
@@ -506,7 +506,7 @@ class pImage extends pDraw
 					echo $Params[0] . IMAGE_MAP_DELIMITER . $Params[1] . IMAGE_MAP_DELIMITER . $Params[2] . IMAGE_MAP_DELIMITER . $Params[3] . IMAGE_MAP_DELIMITER . $Params[4] . "\r\n";
 				}
 			}
-			
+
 		} elseif ($this->ImageMapStorageMode == IMAGE_MAP_STORAGE_FILE) {
 			if (file_exists($StorageFolder . "/" . $UniqueID . ".map")) {
 				$Handle = fopen($StorageFolder . "/" . $UniqueID . ".map", "r");
@@ -530,15 +530,15 @@ class pImage extends pDraw
 	/* Return the HTML converted color from the RGB composite values */
 	function toHTMLColor($R, $G, $B) # Momchil: Not worth caching
 	{
-		
+
 		$R = dechex(max(min(255, $R), 0));
 		$G = dechex(max(min(255, $G), 0));
 		$B = dechex(max(min(255, $B), 0));
-			
+
 		$Color = "#" . (strlen($R) < 2 ? '0' : '') . $R;
 		$Color.= (strlen($G) < 2 ? '0' : '') . $G;
 		$Color.= (strlen($B) < 2 ? '0' : '') . $B;
-		
+
 		return $Color;
 	}
 
@@ -569,7 +569,7 @@ class pImage extends pDraw
 		}
 
 		imagecopy($this->Picture, $Picture, 0, 0, 0, 0, $this->XSize, $this->YSize);
-		
+
 		imagedestroy($Picture);
 	}
 }

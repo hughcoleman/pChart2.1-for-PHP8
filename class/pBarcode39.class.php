@@ -20,7 +20,7 @@ class pBarcode39
 	var $Result;
 	var $pChartObject;
 	var $MOD43;
-	
+
 	/* Class creator */
 	function __construct($BasePath = "", $EnableMOD43 = FALSE)
 	{
@@ -51,10 +51,10 @@ class pBarcode39
 		$DrawArea = FALSE;
 		$FontSize = 12;
 		$Height = 30;
-		
+
 		/* Override defaults */
 		extract($Format);
-		
+
 		$TextString = $this->encode39($TextString);
 		$BarcodeLength = strlen($this->Result);
 		$WOffset = ($DrawArea) ? 20 : 0;
@@ -66,7 +66,7 @@ class pBarcode39
 		$Y2 = $Y1 + sin(($Angle + 90) * PI / 180) * ($HOffset + $Height);
 		$AreaWidth = max(abs($X1), abs($X2));
 		$AreaHeight = max(abs($Y1), abs($Y2));
-		
+
 		return ["Width" => $AreaWidth,	"Height" => $AreaHeight];
 	}
 
@@ -94,7 +94,7 @@ class pBarcode39
 
 		$this->Result = $this->Result . "100101101101";
 		$TextString = "*" . $TextString . "*";
-		
+
 		return $TextString;
 	}
 
@@ -117,10 +117,10 @@ class pBarcode39
 		$AreaBorderR = $AreaR;
 		$AreaBorderG = $AreaG;
 		$AreaBorderB = $AreaB;
-		
+
 		/* Override defaults */
 		extract($Format);
-		
+
 		$TextString = $this->encode39($Value);
 		if ($DrawArea) {
 			$X1 = $X + cos(($Angle - 135) * PI / 180) * 10;
@@ -186,5 +186,3 @@ class pBarcode39
 		return substr($value, $Depart - 1, $NbChar);
 	}
 }
-
-?>

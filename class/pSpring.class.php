@@ -37,7 +37,7 @@ class pSpring
 	var $Y2;
 	var $AutoComputeFreeZone;
 	var $Labels;
-	
+
 	/* Class creator */
 	function __construct()
 	{
@@ -65,7 +65,7 @@ class pSpring
 		#$vars = ["Type", "R", "G", "B", "Alpha"];
 		foreach ($Settings as $key => $value){
 			$this->Labels[$key] = $value;
-		}	
+		}
 	}
 
 	/* Auto compute the FreeZone size based on the number of connections */
@@ -94,9 +94,9 @@ class pSpring
 		$Alpha = 100;
 		$Name = NULL;
 		$Ticks = NULL;
-		
+
 		extract($Settings);
-		
+
 		$this->Links[$FromNode][$ToNode]["R"] = $R;
 		$this->Links[$ToNode][$FromNode]["R"] = $R;
 		$this->Links[$FromNode][$ToNode]["G"] = $G;
@@ -147,10 +147,10 @@ class pSpring
 		$Size = $this->Default["Size"];
 		$Shape = $this->Default["Shape"];
 		$FreeZone = $this->Default["FreeZone"];
-		
+
 		/* Override defaults */
 		extract($Settings);
-		
+
 		if ($Surrounding != NULL) {
 			$BorderR = $R + $Surrounding;
 			$BorderG = $G + $Surrounding;
@@ -177,7 +177,7 @@ class pSpring
 			"Shape" => $Shape,
 			"FreeZone" => $FreeZone
 		];
-		
+
 		if ($Connections != NULL) {
 			if (is_array($Connections)) {
 				foreach($Connections as $Key => $Value){
@@ -195,7 +195,7 @@ class pSpring
 		if (is_array($Nodes)) {
 			foreach($Nodes as $Key => $NodeID) {
 				if (isset($this->Data[$NodeID])) {
-					
+
 					(isset($Settings["R"])) AND $this->Data[$NodeID]["R"] = $Settings["R"];
 					(isset($Settings["G"])) AND $this->Data[$NodeID]["G"] = $Settings["G"];
 					(isset($Settings["B"])) AND $this->Data[$NodeID]["B"] = $Settings["B"];
@@ -644,7 +644,7 @@ class pSpring
 					if (isset($this->Data[$NodeID]) && !isset($Drawn[$Key][$NodeID]) && !isset($Drawn[$NodeID][$Key])) {
 						$Color = ["R" => $this->Default["LinkR"],"G" => $this->Default["LinkG"],"B" => $this->Default["LinkB"],"Alpha" => $this->Default["Alpha"]];
 						#if ($this->Links != "") {
-						if (count($this->Links) > 0) {	
+						if (count($this->Links) > 0) {
 							if (isset($this->Links[$Key][$NodeID]["R"])) {
 								$Color = ["R" => $this->Links[$Key][$NodeID]["R"],"G" => $this->Links[$Key][$NodeID]["G"],"B" => $this->Links[$Key][$NodeID]["B"],"Alpha" => $this->Links[$Key][$NodeID]["Alpha"]];
 							}

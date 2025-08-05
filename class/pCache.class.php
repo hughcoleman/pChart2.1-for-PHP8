@@ -22,19 +22,19 @@ class pCache
 	/* Class creator */
 	function __construct(array $Settings = [])
 	{
-		
+
 		#if (!is_dir("cache")){
 		#	mkdir("cache", 0775);
 		#}
-		
+
 		$this->CacheFolder = isset($Settings["CacheFolder"]) ? $Settings["CacheFolder"] : "cache";
-		
+
 		$this->CacheIndex = isset($Settings["CacheIndex"]) ? $Settings["CacheIndex"] : "index.db";
 		$this->CacheIndex = $this->CacheFolder . "/" . $this->CacheIndex;
-		
+
 		$this->CacheDB = isset($Settings["CacheDB"]) ? $Settings["CacheDB"] : "cache.db";
 		$this->CacheDB = $this->CacheFolder . "/" . $this->CacheDB;
-		
+
 		if (!file_exists($this->CacheIndex)) {
 			touch($this->CacheIndex);
 		}
@@ -201,7 +201,7 @@ class pCache
 					}
 				}
 			}
-			
+
 			fclose($Handle);
 		}
 
@@ -250,7 +250,7 @@ class pCache
 		/* Lookup for the picture in the cache */
 		$CacheInfo = $this->isInCache($ID, TRUE, TRUE);
 		/* Not in the cache */
-		if (!$CacheInfo) { 
+		if (!$CacheInfo) {
 			# Momchil: fread returns FALSE on failure. Return FALSE here as well and not NULL
 			return FALSE;
 		}
