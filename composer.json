@@ -1,6 +1,6 @@
 {
-  "name": "bozhinov/pChart2.0-for-PHP7",
-  "description": "Fork of pChart 2.0 compatible with PHP 7",
+  "name": "bozhinov/pChart2.1-for-PHP8",
+  "description": "Fork of pChart 2.1 compatible with PHP 8",
   "Version": "1.3",
   "keywords": [
     "php",
@@ -12,17 +12,16 @@
     "pizza",
     "server side charts"
   ],
-  "homepage": "https://github.com/bozhinov/pChart2.0-for-PHP7",
+  "homepage": "https://github.com/magma1447/pChart2.1-for-PHP8",
   "type": "project",
   "license": "GPL-3.0",
   "support": {
-    "issues": "https://github.com/bozhinov/pChart2.0-for-PHP7/issues",
-    "source": "https://github.com/bozhinov/pChart2.0-for-PHP7"
+    "issues": "https://github.com/magma1447/pChart2.1-for-PHP8/issues",
+    "source": "https://github.com/magma1447/pChart2.1-for-PHP8"
   },
   "authors": [
     {
-      "name": "Momchil Bozhinov(bozhinov)",
-      "email": "momchil@bojinov.info"
+      "name": "Magnus Månsson (magma1447)",
     }
   ],
 
@@ -33,8 +32,7 @@
   },
 
   "require": {
-    "php": ">=7.0",
+    "php": ">=8.0",
     "ext-gd": "*"
   }
-
 }
