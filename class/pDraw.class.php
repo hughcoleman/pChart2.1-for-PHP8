@@ -361,7 +361,7 @@ class pDraw
                 $X2 = floor($X2) - 1;
             }
 
-            imageline($this->Picture, $X1, $Yp, $X2, $Yp, $ManualColor);
+            imageline($this->Picture, (int) $X1, (int) $Yp, (int) $X2, (int) $Yp, $ManualColor);
         }
 
         $this->drawFilledRectangle($X1, $MinY + 1, floor($X2), $MaxY - 1, $Color);
@@ -1112,7 +1112,7 @@ class pDraw
         }
 
         $C_TextColor = $this->AllocateColor($R, $G, $B, $Alpha);
-        imagettftext($this->Picture, $FontSize, $Angle, $X, $Y, $C_TextColor, realpath($FontName), $Text);
+        imagettftext($this->Picture, $FontSize, $Angle, (int) $X, (int) $Y, $C_TextColor, realpath($FontName), $Text);
         $this->Shadow = $Shadow;
 
         return $TxtPos;
@@ -1524,7 +1524,7 @@ class pDraw
 
         extract($Format);
 
-        $Angle = $Angle % 360;
+        $Angle = ((int) $Angle) % 360;
         $X2 = sin(($Angle + 180) * PI / 180) * $Length + $X1;
         $Y2 = cos(($Angle + 180) * PI / 180) * $Length + $Y1;
         ($RoundPos && $Angle > 0 && $Angle < 180) AND $Y2 = ceil($Y2);
