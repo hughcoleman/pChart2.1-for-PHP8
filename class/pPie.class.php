@@ -862,7 +862,7 @@ class pPie
             }
         }
 
-        $this->Shadow = $RestoreShadow;
+        $this->pChartObject->Shadow = $RestoreShadow;
     }
 
     /* Set the color of the specified slice */
