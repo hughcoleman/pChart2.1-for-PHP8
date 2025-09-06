@@ -1364,8 +1364,8 @@ class pPie
                 $Slices[$Slice]["Angle"][] = $i;
             }
 
-            $OutX2 = $Xc;
-            $OutY2 = $Yc;
+            $OutX2 = $Xc ?? NULL;
+            $OutY2 = $Yc ?? NULL;
             $Slices[$Slice]["Angle"][] = VOID;
             $Lasti = $i;
             $Step = (360 / (2 * PI * $InnerRadius)) / 2;
@@ -1400,8 +1400,8 @@ class pPie
                 $Slices[$Slice]["Angle"][] = $i;
             }
 
-            $InX2 = $Xc;
-            $InY2 = $Yc;
+            $InX2 = $Xc ?? NULL;
+            $InY2 = $Yc ?? NULL;
             $Slices[$Slice]["InX1"] = $InX1;
             $Slices[$Slice]["InY1"] = $InY1;
             $Slices[$Slice]["InX2"] = $InX2;
